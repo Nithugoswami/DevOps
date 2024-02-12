@@ -47,6 +47,8 @@ spec:
                 stage('Deploy Images') {
                         container(name: 'egov-deployer', shell: '/bin/sh') {
                             sh """
+                                echo $CLUSTER_CONFIGS
+                                ls -ltrh /opt/egov/egov-deployer/
                                 /opt/egov/egov-deployer deploy --helm-dir `pwd`/${pipelineParams.helmDir} -c=${env.CLUSTER_CONFIGS}  -e ${pipelineParams.environment} "${env.IMAGES}"
                             """
                             }
